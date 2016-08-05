@@ -6,8 +6,8 @@
   <% end %>
 </ul>
 
-<%= if @player.has_game %>
-  <%= form_for @player, :url => {controller: "games", action: "create"}, :html => {:method => "get"} do |f| %>
-    <%= f.submit "Play" %>
-  <% end %>
+<% if @player.has_game != 'f' %>
+  <%= link_to "Play", "/games/show" %>
+<% else %>
+  <h5>Please wait for an opponent to be matched... Please Refresh</h5>
 <% end %>
