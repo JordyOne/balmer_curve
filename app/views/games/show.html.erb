@@ -75,7 +75,7 @@ var failure = function(response) {
     else if (myFuncCalls >= 10) {
     var endTime = new Date()
       var myTime = endTime - startTime
-      var data = { id: player_id, time: myTime }
+      var data = { player_id: player_id, time: myTime }
       dispatcher.trigger('i_won', data, success, failure);
         } else {
       draw();

@@ -16,8 +16,10 @@ class ConnectionController < WebsocketRails::BaseController
 
  def i_won
     # The `message` method contains the data received
+    message.time
+    message.player_id
       trigger_success
-      trigger_failure 
+      trigger_failure
  end
 
 
