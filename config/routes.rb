@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'play#index'
-  match '/play/show', to: "play#show", via: :get
+  match '/games/show', to: "games#show", via: :get
   resources :players, only: [:index, :new, :create]
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
