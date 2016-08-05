@@ -1,2 +1,53 @@
 <%= @player_1.name %>
 <%= @player_2.name %>
+
+<div class="box">
+
+</div>
+
+<script>
+  var myShakeEvent = new Shake({
+    threshold: 15, // optional shake strength threshold
+    timeout: 300 // optional, determines the frequency of event generation
+  });
+  myShakeEvent.start();
+
+  window.addEventListener('shake', shakeEventDidOccur, false);
+
+  //function to call when shake occurs
+  function shakeEventDidOccur () {
+
+      //put your own code here etc.
+      // draw();
+
+      // complete event
+
+      // count
+      myFunction();
+  }
+
+  var myFuncCalls = 0;
+
+  var myFunction = function () {
+
+    // myFuncCalls++;
+    // alert( "I have been called " + myFuncCalls + " times" );
+
+    if (myFuncCalls >= 10) {
+      alert('you win');
+    } else {
+      draw();
+      myFuncCalls++;
+    }
+
+  };
+
+  var draw = function (pos) {
+
+    $('.box').velocity({
+      height: "+=50px"
+    });
+
+  };
+
+</script>
