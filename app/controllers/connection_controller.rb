@@ -16,11 +16,9 @@ class ConnectionController < WebsocketRails::BaseController
 
  def i_won
     # The `message` method contains the data received
-      send_message :opponenet_won, message
+      trigger_success
+      trigger_failure 
  end
 
- def i_shook
-   send_message :opponent_shook, message
- end
 
 end
