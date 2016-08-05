@@ -13,4 +13,14 @@ class ConnectionController < WebsocketRails::BaseController
 # The :connection_closed method is fired automatically when a client loses connection without sending a disconnect frame.
  def connection_closed
  end
+
+ def i_won
+    # The `message` method contains the data received
+      send_message :opponenet_won, message
+ end
+
+ def i_shook
+   send_message :opponent_shook, message
+ end
+
 end

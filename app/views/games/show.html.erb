@@ -1,7 +1,41 @@
-<script>
+<%= @player_1.name %>
+<%= @player_2.name %>
 
+<div id="winner"></div>
+<div class="box">
+
+</div>
+
+<div class="opponentBox">
+
+</div>
+
+<script>
+$(document).ready(function(){
+var playerID = <%= @player_id %>
 var dispatcher = new WebSocketRails('localhost:3000/websocket');
 
+dispatcher.bind('opponent_shook', opponentDraw);
+dispatcher.bind('opponent_won', opponentWon);
+
+function opponentDraw(){
+  if(opponenentWon.id == player_id){
+
+  } else {
+    $('.opponentBox').velocity({
+      height: "+=50px"
+    });
+  }
+}
+
+function opponentWon(){
+  if(opponenentWon.id == player_id){}
+  else {
+  dispatcher.unbind('opponent_shook');
+  $('#winner').append("<h1>Your opponent won!</h1>")
+}
+
+}
 
 var success = function(response) {
   console.log("Wow it worked: "+response.message);
@@ -11,7 +45,54 @@ var failure = function(response) {
   console.log("That just totally failed: "+response.message);
 }
 
-var object_to_send = { data: 'test' }
+var data = { id: player_id }
+var data = { id: player_id }
 
-dispatcher.trigger('some_event', object_to_send, success, failure);
+  var myShakeEvent = new Shake({
+    threshold: 15, // optional shake strength threshold
+    timeout: 300 // optional, determines the frequency of event generation
+  });
+  myShakeEvent.start();
+
+  window.addEventListener('shake', shakeEventDidOccur, false);
+
+  //function to call when shake occurs
+  function shakeEventDidOccur () {
+
+      //put your own code here etc.
+      // draw();
+
+      // complete event
+
+      // count
+      myFunction();
+  }
+
+  var myFuncCalls = 0;
+
+  var myFunction = function () {
+
+    // myFuncCalls++;
+    // alert( "I have been called " + myFuncCalls + " times" );
+
+    if (myFuncCalls >= 10) {
+      dispatcher.unbind('opponent_shook');
+      dispatcher.unbind('opponent_won');
+      dispatcher.trigger('i_won', shake_win, success, failure);
+      $('#winner').append("<h1>You won!</h1>")
+      alert('you win');
+    } else {
+      dispatcher.trigger('i_shook', shake_data, success, failure);
+      draw();
+      myFuncCalls++;
+    }
+  };
+
+  var draw = function (pos) {
+    $('.box').velocity({
+      height: "+=50px"
+    });
+
+  };
+  })
 </script>

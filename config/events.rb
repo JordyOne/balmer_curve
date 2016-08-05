@@ -18,4 +18,7 @@ subscribe :client_connected, :to => ConnectionController, :with_method => :clien
 subscribe :client_disconnected, :to => ConnectionController, :with_method => :delete_user
 # The :connection_closed method is fired automatically when a client loses connection without sending a disconnect frame.
 subscribe :connection_closed, :to => ConnectionController, :with_method => :delete_user
+
+subscribe :i_won, :to => ConnectionController, :with_method => :i_won
+subscribe :i_shook, :to => ConnectionController, :with_method => :i_shook
 end
