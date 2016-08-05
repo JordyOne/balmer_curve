@@ -4,7 +4,7 @@ class GamesController < ApplicationController
    @game ||= Game.find_by(player_2_id: session[:player_id])
 
 
-   redirect_to game_path(@game)
+   redirect_to games_show_path(@game)
  end
   def show
     @game = Game.find(params[:id])
