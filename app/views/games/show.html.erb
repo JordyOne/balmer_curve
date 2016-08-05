@@ -1,10 +1,50 @@
 <%= @player.name %>
 
+<div id="winner"></div>
 <div class="box">
 
 </div>
 
+<div class="opponentBox">
+
+</div>
+
 <script>
+$(document).ready(function(){
+var playerID = <%= @player_id %>
+var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+// dispatcher.bind('opponent_shook', opponentDraw);
+// dispatcher.bind('opponent_won', opponentWon);
+
+// function opponentDraw(){
+//   if(opponenentWon.id == player_id){
+//
+//   } else {
+//     $('.opponentBox').velocity({
+//       height: "+=50px"
+//     });
+//   }
+// }
+
+// function opponentWon(){
+//   if(opponenentWon.id == player_id){}
+//   else {
+//   dispatcher.unbind('opponent_shook');
+//   $('#winner').append("<h1>Your opponent won!</h1>")
+// }
+
+}
+
+var success = function(response) {
+  $('#winner').append('<h1>New high score!</h1>')
+}
+
+var failure = function(response) {
+  $('#winner').append('<h1>You did not get in the top 10 :(</h1>')
+}
+
+
   var myShakeEvent = new Shake({
     threshold: 15, // optional shake strength threshold
     timeout: 300 // optional, determines the frequency of event generation
@@ -26,27 +66,26 @@
   }
 
   var myFuncCalls = 0;
-
   var myFunction = function () {
 
-    // myFuncCalls++;
-    // alert( "I have been called " + myFuncCalls + " times" );
-
-    if (myFuncCalls >= 10) {
-      alert('you win');
-    } else {
+    if (myFuncCalls === 0){
+      var startTime = new Date();
+    }
+    else if (myFuncCalls >= 10) {
+    var endTime = new Date()
+      var myTime = endTime - startTime
+      var data = { player_id: player_id, time: myTime }
+      dispatcher.trigger('i_won', data, success, failure);
+        } else {
       draw();
       myFuncCalls++;
     }
-
   };
-
   var draw = function (pos) {
-
     $('.box').velocity({
       height: "+=50px"
     });
 
   };
-
+  })
 </script>
