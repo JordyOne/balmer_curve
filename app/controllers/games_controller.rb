@@ -1,9 +1,14 @@
 class GamesController < ApplicationController
-  def show
-    @game = Game.find_by(player_1_id: session[:player_id])
-    @game ||= Game.find_by(player_2_id: session[:player_id])
+  def create
+    @game = Game.new(player_id: session[:player_id])
+    if @game.save
+      redirect_to game_path(@game)
+    end
+  end
 
-    @player_1 = Player.find(@game.player_1_id)
-    @player_2 = Player.find(@game.player_2_id)
+  def show
+    @game = Game.find_by(player_id: session[:player_id])
+
+    @player = Player.find(@game.player_id)
   end
 end
