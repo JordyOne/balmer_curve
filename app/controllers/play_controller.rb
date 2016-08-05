@@ -1,6 +1,9 @@
 class PlayController < ApplicationController
   def index
-    Player.find(params[:id])
+
   end
 
+  def new
+    @player = Player.new
+  end
 end
