@@ -6,6 +6,6 @@
   <% end %>
 </ul>
 
-<%= form_for @player, :url => {controller: "play", action: "show"}, :html => { :method => "get" } do |f| %>
+<%= form_for @player, :url => {controller: "games", action: "show"}, :html => { :method => "get" } do |f| %>
   <%= f.submit "Play" %>
 <% end %>
